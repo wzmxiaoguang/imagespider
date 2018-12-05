@@ -1,6 +1,8 @@
 # imagespider
 今日头条图集爬取
 
+由于对方服务器代码更改以及本人过于懒惰，现只有gui版本更新，其它版本若想使用请自行参照gui版本添加headers中的referer项
+
 #### 原始版本
 
 spider.py - 带MongoDB数据库储存的原始版本

@@ -6,8 +6,8 @@ from requests.exceptions import RequestException
 from json.decoder import JSONDecodeError
 from hashlib import md5
 from socket_jpg import img as socket
-import base64 
-import requests 
+import base64
+import requests
 import json
 import sys 
 import re
@@ -47,7 +47,9 @@ class Runthread(QtCore.QThread):
                 'from': 'gallery',
                 'pd': '',
             }
+            data1 = {'keyword': keyword}
             url = 'https://www.toutiao.com/search_content/?' + urlencode(data)
+            self.referer = 'https://www.toutiao.com/search_content/?' + urlencode(data1)
             response = requests.get(url)
             if response.status_code == 200:
                 return response.text
@@ -66,7 +68,8 @@ class Runthread(QtCore.QThread):
 
     def get_page_detail(self, url):
         try:
-            headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
+            headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',
+                       'referer': self.referer}
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
                 return response.text
